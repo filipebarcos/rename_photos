@@ -4,7 +4,7 @@ const moment = require('moment');
 
 const directory = process.argv[2];
 
-glob(`${directory}/**/*.@(jpeg|jpg|JPG)`, (err, files) => {
+glob(`${directory}/**/*.@(jpeg|jpg|JPG|png|PNG)`, (err, files) => {
   if (err) { throw err; }
   files.forEach((filename) => {
     fs.stat(filename, (err, stats) => {
@@ -16,7 +16,7 @@ glob(`${directory}/**/*.@(jpeg|jpg|JPG)`, (err, files) => {
       const newPath = `${path.join('/')}/${newName}.${ext}`.replace(/\:/g, '-');
       fs.rename(filename, newPath, (err) => {
         if (err) { throw err; }
-        console.log('File renamed.');
+        console.log(`Renamed: ${filename} -> ${newPath}`);
       });
     });
   });
